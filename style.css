@@ -1,0 +1,31 @@
+*, *::before, *::after {
+/* This stops padding from making boxes wider than you set them */
+margin: 0;
+padding: 0;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+form{
+    margin:0px auto;
+}
+
+input{
+    margin:8px 0;
+}
+.note{
+    font-size:8px;
+    margin-top:-8px;
+    margin-bottom:8px;
+}
+
+button{
+    padding:5px;
+    background-color:blue;
+    border-radius:5px;
+    color:white;
+}

@@ -1,56 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<style>
-	*, *::before, *::after {
-	    /* This stops padding from making boxes wider than you set them */
-	    margin: 0;
-	    padding: 0;
-	}
-	
-	body{
-	    display:flex;
-	    justify-content:center;
-	    align-items:center;
-	}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <form method="POST" action="login.php">
+      <label for="user_name">
+        <p>Username</p>
+        <input
+          type="text"
+          value="user"
+          id="user_name"
+          placeholder="Enter username"
+          required
+        />
+        <p class="note">Never share you username</p>
+      </label>
 
-	form{
-	    margin:0px auto;
-	}
-
-	input{
-	    margin:8px 0;
-	}
-	.note{
-	    font-size:8px;
-	    margin-top:-8px;
-	    margin-bottom:8px;
-	}
-
-	button{
-	    padding:5px;
-	    background-color:blue;
-	    border-radius:5px;
-	    color:white;
-	}
-	</style>
-    </head>
-    <body>
-	<form method="PUT" action="the link to my php server">
-	    <label for="user_name">  
-		<p>username</p>
-		<input type="text" value="user" id="user_name" placeholder="Enter email">
-		<p class="note">never share you user name</p>
-	    </label>
-	    <label for="pwd">
-		<p>Password</p>
-		<input type="password" value="pwd" id="pwd" placeholder="Password">
-		<p><button type="submit">Login</button></p>
-		<label>
-
-	</form>
-    </body>
+      <label for="pwd">
+        <p>Password</p>
+        <input
+          type="password"
+          value="pwd"
+          id="pwd"
+          placeholder="Password"
+          required
+        />
+        <p>
+          <button type="submit">Login</button>
+        </p>
+      </label>
+    </form>
+  </body>
 </html>
