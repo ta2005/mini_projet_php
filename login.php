@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->execute([
                 'username' => $username,
                 'password' => $password
-            ])
+            ]);
 
             $user = $stmt->fetch();
 
