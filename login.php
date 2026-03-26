@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once 'db.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,6 +25,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $stmt->fetch();
 
             if($user) {
+                $_SESSION['user_id']    = $user['id'];
+                $_SESSION['username']   = $user['username'];
+                $_SESSION['role']       = $user['role'];
+
                 header("HTTP/1.1 501 Not Implemented");
                 header("Content-Type: text/plain");
 
