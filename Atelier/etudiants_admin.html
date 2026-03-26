@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des étudiants - Admin</title>
+    <header>
+        <h3>Students Management System</h3>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Liste des étudiants</a></li>
+            <li><a href="#">Liste des sections</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </header>
+</head>
+<body>
+    <section>
+        <h1>Liste des étudiants</h1>
+        <label for="search"></label>
+        <input type="text" id="search" name="search" size="35" placeholder="Veuillez renseigner votre étudiant">
+        <button type="submit">Filtrer</button><button>Ajouter</button><br><br>
+        <button type="button">Copy</button>
+        <button type="button">CSV</button>
+        <button type="button">Excel</button>
+        <button type="button">PDF</button>
+        <div>
+            Search: <input type="text" size="35"><br><br>
+        </div>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>image</th>
+                <th>name</th>
+                <th>birthday</th>
+                <th>section</th>
+                <th>actions</th>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <fieldset>
+            <legend><h2>Ajouter un étudiant</h2></legend>
+            name: <br><input type="text" name="name" style="width:100%"><br><br>
+            Data de naissance: <br><input type="date" name="birthday" style="width:100%"><br><br>
+            Image: <br><input type="file" name="image"><br><br>
+            Section:<br><select name="section" style="width:100%">
+                <option value="GL">GL</option>
+                <option value="RT">RT</option>
+                <option value="IIA">IIA</option>
+                <option value="IMI">IMI</option>
+                </select>
+            <br><br>
+            <button type="submit">Submit</button>
+        </fieldset>
+    </section>
+    <section>
+        <fieldset>
+            <legend><h2>Modifier un étudiant</h2></legend>
+            name: <br><input type="text" name="name" style="width:100%"><br><br>
+            Data de naissance: <br><input type="date" name="birthday" style="width:100%"><br><br>
+            Section:<br><select name="section" style="width:100%">
+                <option value="GL">GL</option>
+                <option value="RT">RT</option>
+                <option value="IIA">IIA</option>
+                <option value="IMI">IMI</option>
+                </select>
+            <br><br>
+            <button type="submit">Submit</button>
+        </fieldset>
+    </section>
+</body>
+</html>
+
+
+
