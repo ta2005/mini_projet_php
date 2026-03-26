@@ -1,10 +1,17 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- if we gonna verify, we use:
+-- SELECT * FROM utilisateur
+-- WHERE name = $1 AND password = crypt($2, password);
+-- where $1 is the guess for username and $2 for password
+
 -- CREATE TYPE  role AS  ENUM ('normal','admin');
 
 CREATE TABLE IF NOT EXISTS utilisateur(
     id SERIAL,
     name VARCHAR(100) NOT NULL,
     --5allehe 3allah
-    password VARCHAR(100) NOT NULL,
+    password TEXT NOT NULL,
     role role,
     CONSTRAINT pk_user PRIMARY KEY(id)
 );
@@ -25,8 +32,9 @@ CREATE TABLE IF NOT EXISTS etudiant(
 
 
 -- INSERT INTO  utilisateur(name,password,role) VALUES
--- ('talel zighni','123','admin'),
--- ('ahmed el hai','1234','normal');
+-- ('talel zighni', crypt('123', gen_salt('bf')), 'admin'),
+-- ('ahmed el hai', crypt('1234', gen_salt('bf')), 'normal');
+
 
 -- Un user normal n’a le droit qu’à la consultation
 -- 7. Vous allez avoir une table etudiant avec un nom, une
