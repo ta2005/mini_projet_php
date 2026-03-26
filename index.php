@@ -22,10 +22,11 @@
 	}
 
 	input{
+		font-size:16px;
 	    margin:8px 0;
 	}
 	.note{
-	    font-size:8px;
+	    font-size:14px;
 	    margin-top:-8px;
 	    margin-bottom:8px;
 	}
@@ -39,15 +40,16 @@
 	</style>
     </head>
     <body>
-	<form method="PUT" action="the link to my php server">
+        <?php setcookie('mode','light'); ?>
+	<form action="processLogin" method="POST" >
 	    <label for="user_name">  
 		<p>username</p>
-		<input type="text" value="user" id="user_name" placeholder="Enter email">
+		<input type="text" value="" id="user_name" placeholder="Enter Username">
 		<p class="note">never share you user name</p>
 	    </label>
 	    <label for="pwd">
 		<p>Password</p>
-		<input type="password" value="pwd" id="pwd" placeholder="Password">
+		<input type="password" value="" id="pwd" placeholder="Password">
 		<p><button type="submit">Login</button></p>
 		<label>
 
