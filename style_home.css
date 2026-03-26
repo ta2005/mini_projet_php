@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, sans-serif;
+  display: block;
+  background-color: #f4f6f9;
+}
+.navbar {
+  background-color: #3b5998;
+  color: white;
+  padding: 15px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}
+.navbar .brand {
+  margin-right: auto;
+  font-size: 1.2em;
+}
+.content {
+  padding: 40px;
+  text-align: center;
+}
+.welcome-msg {
+  font-size: 2em;
+  color: #333;
+}

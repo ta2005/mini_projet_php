@@ -72,9 +72,11 @@ INSERT INTO section (designation, description) VALUES
 ('GL', 'Genie Logiciel'),
 ('RT', 'Resaux et Telecommunications'),
 ('IIA', 'Informatique Industrielle et Automatique'),
-('IMI', 'Instrumentation et Maintenance Industrielle');
+('IMI', 'Instrumentation et Maintenance Industrielle')
+ON CONFLICT DO NOTHING;
 
 INSERT INTO  utilisateur(username, password, role) VALUES
 ('talel zighni', crypt('123', gen_salt('bf')), 'admin'),
 ('ahmed el hani', crypt('1234', gen_salt('bf')), 'normal'),
-('rayenn kahammar', crypt('pass10', gen_salt('bf')), 'normal');
+('rayenn kahammar', crypt('pass10', gen_salt('bf')), 'normal')
+ON CONFLICT (username) DO NOTHING;
