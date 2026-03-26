@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS section(
 
 CREATE TABLE IF NOT EXISTS etudiant(
     id SERIAL PRIMARY KEY,
+    img VARCHAR(256) NOT NULL,
     name VARCHAR(100) NOT NULL,
     date_de_naiss DATE NOT NULL,
-    img VARCHAR(256) NOT NULL,
     section INTEGER,
     CONSTRAINT fk_section FOREIGN KEY(section) REFERENCES SECTION(id)
 );
