@@ -8,9 +8,17 @@
   </head>
   <body>
 	<!--   Display error message if error is set from login.php -->
-	<?php if (isset($_GET['error'])): ?>
+	<?php if (isset($_GET['error'])):
+		$err_msg = match($_GET['error']) {
+			'creds' => 'Vérifier vos crédentiels!',
+			'db'	=> 'Erreur de la base de données!',
+			'vide'	=> 'Veuillez remplir les champs!',
+			default	=> 'Erreur inconnue.'
+		};
+
+	?>
 		<div id="error-msg">
-			Vérifier vos crédentiels!
+			<?php echo $err_msg; ?>
 			<span class="close-btn" onclick="document.getElementById('error-msg').style.display='none'">&times;</span>
 		</div>
 	<?php endif; ?>
@@ -21,7 +29,7 @@
         <p>Username</p>
         <input
           type="text"
-          value="user"
+          name="username"
           id="user_name"
           placeholder="Enter username"
           required
@@ -33,7 +41,7 @@
         <p>Password</p>
         <input
           type="password"
-          value="pwd"
+          name="password"
           id="pwd"
           placeholder="Password"
           required
