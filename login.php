@@ -29,10 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['username']   = $user['username'];
                 $_SESSION['role']       = $user['role'];
 
-                header("HTTP/1.1 501 Not Implemented");
-                header("Content-Type: text/plain");
-
-                echo "No home page yet :P";
+                header("Location: home.php");
                 exit;
             } else {
                 header("Location: index.php?error=creds");
