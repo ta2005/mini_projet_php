@@ -1,6 +1,35 @@
+-- =============================
+--  DATABASE AND USER SETUP
+--    USER: tp_user
+--    PASS: tp_pass
+-- =============================
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'tp_user') THEN
+        CREATE USER tp_user WITH PASSWORD 'tp_pass';
+    END IF;
+END
+$$;
+
+-- CREATE DATABASE IF NOT EXISTS gestion_etudiants OWNER tp_user;
+-- USE DATABASE gestion_etudiants;
+
+
+
+-- =============================
+--  SCHEMA SETUP
+-- =============================
+
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-CREATE TYPE  user_role AS  ENUM ('normal','admin');
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'user_role') THEN
+        CREATE TYPE user_role AS ENUM ('normal', 'admin');
+    END IF;
+END
+$$;
 
 CREATE TABLE IF NOT EXISTS utilisateur (
     id SERIAL,
@@ -25,6 +54,19 @@ CREATE TABLE IF NOT EXISTS etudiant(
     section_id INTEGER REFERENCES section(id) ON DELETE SET NULL
 );
 
+
+-- =============================
+--  PERMISSIONS
+-- =============================
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO tp_user;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO tp_user;
+
+
+
+-- =============================
+--  DUMMY VALUES
+-- =============================
 
 INSERT INTO section (designation, description) VALUES
 ('GL', 'Genie Logiciel'),
