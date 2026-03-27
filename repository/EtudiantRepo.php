@@ -5,32 +5,32 @@
    //this is a wrapper class around the section schema
    //it will have create
    //delete
-   require_once('../entities/Section.php');
+   require_once('../entities/Etudiant.php');
 
-   class SectionRepo{ 
+   class EtudiantRepo{ 
       private PDO $conn;
       public function __construct(PDO $conn){
 	 $this->conn=$conn;
       }
       public function fetchAll():?array{
-	 $query="SELECT * FROM section";
+	 $query="SELECT * FROM ETUDIANT";
 	 try{
 	    $stmt=$this->conn->prepare(query: $query);
 	    $stmt->execute();
-	    return $stmt->fetchAll(PDO::FETCH_CLASS,"Section");
+	    return $stmt->fetchAll(PDO::FETCH_CLASS,"Etudiant");
 	 }catch(PDOException $e){
 	    print_r($e->getMessage());
 	    return null;
 	 }
       }
-      public function fetchById(int $id):?Section{
-	 $query='SELECT * FROM SECTION WHERE id=?';
+      public function fetchById(int $id):?Etudiant{
+	 $query='SELECT * FROM ETUDIANT WHERE id=?';
 	 try{
 	    $stmt=$this->conn->prepare(query: $query);
 	    $stmt->bindValue(1,$id);
 	    $stmt->execute();
 	    //php snake case is advice becuase variable are case insentive
-	    $stmt->setFetchMode(PDO::FETCH_CLASS,'Section');
+	    $stmt->setFetchMode(PDO::FETCH_CLASS,'Etudiant');
 	    $result=$stmt->fetch();
 	    return ($result?$result:null);
 	 }catch(PDOException $e){
@@ -38,13 +38,15 @@
 	    return null;
 	 }
       }
-      public function create($designation,$description):?int{
-	 $query='INSERT INTO SECTION(designation,description) 
-	 VALUES(:designation,:description)
+      public function create(string $name,string $date,string $img,int $section):?int{
+	 $query=' INSERT INTO Etudiant (name, date_de_naiss, img, section) 
+	 VALUES (:name, :date, :img, :section) 
 	 RETURNING id;';
 	 try{
 	    $stmt=$this->conn->prepare(query: $query);
-	    $stmt->execute(["designation"=> $designation,"description"=>$description]);
+	    $stmt->execute([
+		  "name"=>$name, "date"=>$date, "img"=>$img, "section"=>$section 
+	    ]);
 	    //php snake case is advice becuase variable are case insentive
 	    echo "success\n";
 	    return $stmt->fetchColumn();
@@ -54,7 +56,7 @@
 	 }
       }
       public function delete(int $id):void{
-	 $query='DELETE FROM section WHERE id=?';
+	 $query='DELETE FROM Etudiant WHERE id=?';
 	 try{
 	    $stmt=$this->conn->prepare(query: $query);
 	    //the ? are one indexed because fu
@@ -70,7 +72,8 @@
    }
    $conn =  new PDO("pgsql:host=localhost;dbname=mini_travail_sel","talel","");
    /* echo $conn->check_version(); */
-   $test = new SectionRepo($conn);
-   print_r($test->fetchAll());
+   $test = new EtudiantRepo($conn);
+   $test->create("aziz asmi","2006-02-1","tabasi",1);
+   echo $test->fetchAll()[0];
 
 ?>
