@@ -46,13 +46,14 @@ CREATE TABLE IF NOT EXISTS section (
     description TEXT
 );
 
-CREATE TABLE IF NOT EXISTS etudiant(
+CREATE TABLE IF NOT EXISTS etudiant (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     date_de_naissance DATE NOT NULL,
     img_url VARCHAR(256) NOT NULL,
     section_id INTEGER REFERENCES section(id) ON DELETE SET NULL
 );
+
 
 
 -- =============================
@@ -80,3 +81,11 @@ INSERT INTO  utilisateur(username, password, role) VALUES
 ('ahmed el hani', crypt('1234', gen_salt('bf')), 'normal'),
 ('rayenn kahammar', crypt('pass10', gen_salt('bf')), 'normal')
 ON CONFLICT (username) DO NOTHING;
+
+INSERT INTO etudiant (name, date_de_naissance, img_url, section_id) VALUES
+('Ahmed Mohsen', '2000-01-10', 'https://ui-avatars.com/api/?name=Aymen&background=random', 1),
+('Shinji Ikari', '2001-06-06', 'https://ui-avatars.com/api/?name=shinji&background=random', 3),
+('Leon S. Kennedy', '1977-07-31', 'https://ui-avatars.com/api/?name=leon&background=random', 2),
+('Hatsune Miku', '2005-08-31', 'https://ui-avatars.com/api/?name=miku&background=00ffff', 1),
+('Connor Anderson', '2000-08-15', 'https://ui-avatars.com/api/?name=connor&background=random', 4)
+ON CONFLICT DO NOTHING;
