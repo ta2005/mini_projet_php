@@ -44,7 +44,7 @@ $role = $_SESSION['role'];
     </div>
 
     <div style="padding: 20px;">
-        <h2 style="background-color: #808080;">Liste des étudiants</h2>
+        <h2 style="background-color: #b8b8b8; color: white;">Liste des étudiants</h2>
 
         <div style="margin-bottom: 20px;">
             <input type="text" id="customSearch" placeholder="Veuillez renseigner votre recherche">

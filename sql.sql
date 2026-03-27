@@ -83,7 +83,7 @@ INSERT INTO  utilisateur(username, password, role) VALUES
 ON CONFLICT (username) DO NOTHING;
 
 INSERT INTO etudiant (name, date_de_naissance, img_url, section_id) VALUES
-('Ahmed Mohsen', '2000-01-10', 'https://ui-avatars.com/api/?name=Aymen&background=random', 1),
+('Ahmed Mohsen', '2000-01-10', 'https://ui-avatars.com/api/?name=Ahmed&background=random', 1),
 ('Shinji Ikari', '2001-06-06', 'https://ui-avatars.com/api/?name=shinji&background=random', 3),
 ('Leon S. Kennedy', '1977-07-31', 'https://ui-avatars.com/api/?name=leon&background=random', 2),
 ('Hatsune Miku', '2005-08-31', 'https://ui-avatars.com/api/?name=miku&background=00ffff', 1),
