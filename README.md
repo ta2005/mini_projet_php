@@ -34,6 +34,7 @@ For execution, it may not work because it can be located deep inside your home d
 ```bash
 # Execute our sql.sql
 cat  /path/to/sql.sql | sudo -u postgres psql -d gestion_etudiants
+note: when in ps you can use \i to read a file and parse in the interpreter 
 ```
 ### windows.
 open the SQL shell `psql` then run these:
