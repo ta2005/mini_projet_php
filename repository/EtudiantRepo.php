@@ -17,22 +17,40 @@
 	 try{
 	    $stmt=$this->conn->prepare(query: $query);
 	    $stmt->execute();
-	    return $stmt->fetchAll(PDO::FETCH_CLASS,"Etudiant");
-	 }catch(PDOException $e){
-	    print_r($e->getMessage());
-	    return null;
-	 }
+	    return array_map(fn($row):Etudiant=> new Etudiant(
+	       name:$row["name"],
+	       date_de_naiss:new DateTimeImmutable($row["date_de_naiss"]),
+	       img:$row["img"],
+	       section:$row["section"],
+	       id:$row["id"],
+	    ),
+	    $stmt->fetchAll()
+	 );
+
+      }catch(PDOException $e){
+	 print_r($e->getMessage());
+	 return null;
       }
-      public function fetchById(int $id):?Etudiant{
-	 $query='SELECT * FROM ETUDIANT WHERE id=?';
-	 try{
-	    $stmt=$this->conn->prepare(query: $query);
-	    $stmt->bindValue(1,$id);
-	    $stmt->execute();
-	    //php snake case is advice becuase variable are case insentive
-	    $stmt->setFetchMode(PDO::FETCH_CLASS,'Etudiant');
-	    $result=$stmt->fetch();
-	    return ($result?$result:null);
+   }
+   public function fetchById(int $id):?Etudiant{
+      $query='SELECT * FROM ETUDIANT WHERE id=?';
+      try{
+	 $stmt=$this->conn->prepare(query: $query);
+	 $stmt->bindValue(1,$id);
+	 $stmt->execute();
+	 //php snake case is advice becuase variable are case insentive
+	 $result=$stmt->fetch();
+	 switch($result){
+	    case false:return null;
+	       default :return new Etudiant(
+		  name:$result["name"],
+		  date_de_naiss:new DateTimeImmutable($result["date_de_naiss"]),
+		  img:$result["img"],
+		  section:$result["section"],
+		  id:$result["id"],
+	       );
+	    }
+
 	 }catch(PDOException $e){
 	    print_r($e->getMessage());
 	    return null;
@@ -45,7 +63,7 @@
 	 try{
 	    $stmt=$this->conn->prepare(query: $query);
 	    $stmt->execute([
-		  "name"=>$name, "date"=>$date, "img"=>$img, "section"=>$section 
+	    "name"=>$name, "date"=>$date, "img"=>$img, "section"=>$section 
 	    ]);
 	    //php snake case is advice becuase variable are case insentive
 	    echo "success\n";
@@ -70,10 +88,11 @@
       }
 
    }
-   $conn =  new PDO("pgsql:host=localhost;dbname=mini_travail_sel","talel","");
-   /* echo $conn->check_version(); */
-   $test = new EtudiantRepo($conn);
-   $test->create("aziz asmi","2006-02-1","tabasi",1);
-   echo $test->fetchAll()[0];
+   /* $conn =  new PDO("pgsql:host=localhost;dbname=mini_travail_sel","talel",""); */
+   /* $test = new EtudiantRepo($conn); */
+   /* $test->create("aziz asmi","2006-02-1","tabasi",1); */
+   /* foreach ($test->fetchAll() as $etd){ */
+   /*    echo $test->delete($etd->getId()); */
+   /* } */
 
 ?>
