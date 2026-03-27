@@ -1,3 +1,9 @@
+<?php session_start();
+   if (!isset($_SESSION["name"])){
+      header("Location:index.php");
+      exit();
+   }
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -33,7 +39,6 @@
 	 require_once(__DIR__.'/../src/repository/EtudiantRepo.php');
 	 require_once(__DIR__.'/../src/config.php');
 	 $std_db = new EtudiantRepo($conn);
-	 echo 'hello';
 	 foreach ($std_db->fetchAll() as $student){
 	    echo $student->toHtml($_SESSION["role"]??"");
 	 }
