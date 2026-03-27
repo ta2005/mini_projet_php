@@ -1,0 +1,23 @@
+use var_dump and phpinfo for debuggin 
+in the form use name for the think in the query
+arrays
+they keys can be either ints or string
+bool , NULL and floats will be cast to an array
+valdi strings formed with deciaml will be cast ot int
+
+you can specify only some keys
+
+if not specifed each value will be given the next key value as well using arr[]
+print_r is better echo
+unset deletes an element from the array
+
+foreach (array as variabe)
+arrays can be destructed
+... this will spread the array 
+you can't spread an array
+
+classes 
+the new keyword  they can also be in string (the fuck)
+php have namespaces
+?->check for null before 
+

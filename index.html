@@ -5,16 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
-	*, *::before, *::after {
-	    /* This stops padding from making boxes wider than you set them */
-	    margin: 0;
-	    padding: 0;
-	}
-	
+*, *::before, *::after {
+    /* This stops padding from making boxes wider than you set them */
+    margin: 0;
+    padding: 0;
+}
+
 	body{
 	    display:flex;
 	    justify-content:center;
 	    align-items:center;
+	    font-family:sans-serif;
 	}
 
 	form{
@@ -39,17 +40,17 @@
 	</style>
     </head>
     <body>
-	<form method="PUT" action="the link to my php server">
+	<form method="POST" action="login.php">
 	    <label for="user_name">  
 		<p>username</p>
-		<input type="text" value="user" id="user_name" placeholder="Enter email">
+		<input type="text" name="user" id="user_name" placeholder="Enter email">
 		<p class="note">never share you user name</p>
 	    </label>
 	    <label for="pwd">
 		<p>Password</p>
-		<input type="password" value="pwd" id="pwd" placeholder="Password">
-		<p><button type="submit">Login</button></p>
-		<label>
+		<input type="password" name="pwd" id="pwd" placeholder="Password">
+	    </label>
+	    <p><button type="submit">Login</button></p>
 
 	</form>
     </body>
