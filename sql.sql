@@ -29,8 +29,7 @@ CREATE TABLE IF NOT EXISTS students(
 );
 
 
-INSERT INTO  users(name,password,role) VALUES
-('rkh',rkh123, 'admin')
+
 -- Un user normal n’a le droit qu’à la consultation
 -- 7. Vous allez avoir une table etudiant avec un nom, une
 -- image, une date de naissance et une section
