@@ -82,9 +82,9 @@ $role = $_SESSION['role'];
                     <?php if($role == 'admin'): ?>
                         <td>
                             <div style="display: flex; gap: 10px; color: #286cff;">
-                                <a href="details_etudiant.php?id=<?= $s[id] ?>"><i data-lucide="info" size="18"></i></a>
+                                <a href="details_etudiant.php?id=<?= $s['id'] ?>"><i data-lucide="info" size="18"></i></a>
 
-                                <a href="edit_etudiant.php?id=<?= $s[id] ?>"><i data-lucide="edit-3" size="18"></i></a>
+                                <a href="edit_etudiant.php?id=<?= $s['id'] ?>"><i data-lucide="edit-3" size="18"></i></a>
 
                                 <a href="#" onclick="confirmDelete(<?= $s['id'] ?>)"><i data-lucide="eraser" size="18"></i></a>
                             </div>
