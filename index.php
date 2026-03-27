@@ -11,6 +11,14 @@
 
 <body>
     <div class="container" >
+    <?php if (isset($_GET['error'])): ?>
+        <div class="alert alert-danger alert-dismissible fade show mt-3">
+            <strong>Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <br>
+            <small><?php echo htmlspecialchars($_GET['error']); ?></small>
+        </div>
+    <?php endif; ?>
     <form action="processLogin.php" method="POST">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
