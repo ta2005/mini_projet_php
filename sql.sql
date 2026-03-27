@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS utilisateur(
    --5allehe 3allah
    password VARCHAR(100) NOT NULL,
    role role,
-   CONSTRAINT pk_user PRIMARY KEY(id)
+   CONSTRAINT pk_user PRIMARY KEY(id),
+   CONSTRAINT un UNIQUE(name)
 );
 
 CREATE TABLE IF NOT EXISTS section(
