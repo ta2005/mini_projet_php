@@ -30,6 +30,11 @@ sudo -u postgres psql -c "CREATE DATABASE gestion_etudiants;"
 # Execute our sql.sql
 sudo -u postgres psql -d gestion_etudiants -f /path/to/sql.sql
 ```
+For execution, it may not work because it can be located deep inside your home directory. A quick fix is through:
+```bash
+# Execute our sql.sql
+cat  /path/to/sql.sql | sudo -u postgres psql -d gestion_etudiants
+```
 ### windows.
 open the SQL shell `psql` then run these:
 ```sql
