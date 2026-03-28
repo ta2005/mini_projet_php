@@ -82,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2 style="margin: 0;">Modifier l'étudiant</h2>
         </div>
 
-        <?php if (isset($error)): ?>
+        <?php if (isset($err_msg)): ?>
         <div id="error-msg" style="position: relative; transform: none; left: 0; bottom: 0; margin-bottom: 15px;">
-            <span><?= $error ?></span>
+            <span><?= $err_msg ?></span>
         </div>
         <?php endif; ?>
 
