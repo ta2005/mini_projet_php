@@ -13,7 +13,7 @@
 	 header("Location:home.php");
 	 exit();
       } else {
-	 $error_message="Inavelid user name of passowrd";
+	 echo '<script>alert("Inavelid user name of passowrd")</script>';
       }   
    }
 ?>

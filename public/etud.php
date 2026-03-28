@@ -37,19 +37,11 @@
 	 require_once(__DIR__.'/../src/entities/Etudiant.php');
 	 require_once(__DIR__.'/../src/repository/EtudiantRepo.php');
 	 require_once(__DIR__.'/../src/config.php');
-	 $id;
-	 if (empty($_GET["id"])){
-	    $id=null;
-	 }else{
-	    $id=(int)$_GET["id"];
-	 }
 	 $std_db = new EtudiantRepo($conn);
-	 $students= $std_db->fetchAll($id);
-	 if (!empty($students)){
-	 foreach ($students as $student){
+	 foreach ($std_db->fetchAll() as $student){
 	    echo $student->toHtml($_SESSION["role"]??"");
 	 }
-      }
+	 
       ?>
       </table>
       </main>

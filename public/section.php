@@ -9,7 +9,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Home</title>
+      <title>Document</title>
    </head>
    <body>
       <nav class="main_nav">	
@@ -21,35 +21,26 @@
       </ul>
       </nav>
       <main>
-      <p class="affiche">lise des etudiant</p>
-      <form methods="PUT" action="ajouter_etud.php">
-	 <button type="submit">ajouter</button>
+      <p class="affiche">liste des section</p>
+      <form methods="tabassi" action="url el tabasii">
+	 <input value="filtre" placeholder="Veuillez rensigner votre">
+	 <button type="submit">Filtrer</button>
       </form>
       <table>
 	 <tr>
 	    <td>id</td>
-	    <td>img</td>
-	    <td>name</td>
-	    <td>date</td>
-	    <td>section</td>
+	    <td>nom</td>
+	    <td>des</td>
 	 </tr>
 	 <?php 
-	 require_once(__DIR__.'/../src/entities/Etudiant.php');
-	 require_once(__DIR__.'/../src/repository/EtudiantRepo.php');
+	 require_once(__DIR__.'/../src/entities/Section.php');
+	 require_once(__DIR__.'/../src/repository/SectionRepo.php');
 	 require_once(__DIR__.'/../src/config.php');
-	 $id;
-	 if (empty($_GET["id"])){
-	    $id=null;
-	 }else{
-	    $id=(int)$_GET["id"];
+	 $std_db = new SectionRepo($conn);
+	 foreach ($std_db->fetchAll() as $student){
+	    echo $student->toHtml();
 	 }
-	 $std_db = new EtudiantRepo($conn);
-	 $students= $std_db->fetchAll($id);
-	 if (!empty($students)){
-	 foreach ($students as $student){
-	    echo $student->toHtml($_SESSION["role"]??"");
-	 }
-      }
+	 
       ?>
       </table>
       </main>
