@@ -15,6 +15,7 @@
       } else {
 	 echo '<script>alert("Inavelid user name of passowrd")</script>';
       }   
+
    }
 ?>
 <!DOCTYPE html>
@@ -23,44 +24,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<style>
-*, *::before, *::after {
-    /* This stops padding from making boxes wider than you set them */
-    margin: 0;
-    padding: 0;
-}
-
-	body{
-	    display:flex;
-	    justify-content:center;
-	    align-items:center;
-	    font-family:sans-serif;
-	}
-
-	form{
-	    margin:0px auto;
-	}
-
-	input{
-	    margin:8px 0;
-	}
-	.note{
-	    font-size:8px;
-	    margin-top:-8px;
-	    margin-bottom:8px;
-	}
-
-	button{
-	    padding:5px;
-	    background-color:blue;
-	    border-radius:5px;
-	    color:white;
-	}
-	</style>
+      <link rel="stylesheet" href="style.css">
     </head>
     <body>
 
-	<form method="POST" action="index.php">
+       <form method="POST" action="index.php" class="card-form">
 	    <label for="user_name">  
 		<p>username</p>
 		<input type="text" name="name" id="user_name" placeholder="Enter email">

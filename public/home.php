@@ -10,6 +10,8 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Home</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
    </head>
    <body>
       <nav class="main_nav">	
@@ -23,36 +25,56 @@
       <main>
       <p class="affiche">lise des etudiant</p>
       <form methods="PUT" action="ajouter_etud.php">
-	 <button type="submit">ajouter</button>
+	 <button type="submit" class="btn-primary">+ Ajouter un étudiant</button>
       </form>
-      <table>
+      <table id="etudiantsTable" class="display" style="width:100%">
+	 <thead>
 	 <tr>
-	    <td>id</td>
-	    <td>img</td>
-	    <td>name</td>
-	    <td>date</td>
-	    <td>section</td>
+	    <th>id</th>
+	    <th>img</th>
+	    <th>name</th>
+	    <th>date</th>
+	    <th>section</th>
+	    <th>action</th>
 	 </tr>
+	 </thead>
 	 <?php 
-	 require_once(__DIR__.'/../src/entities/Etudiant.php');
-	 require_once(__DIR__.'/../src/repository/EtudiantRepo.php');
-	 require_once(__DIR__.'/../src/config.php');
-	 $id;
-	 if (empty($_GET["id"])){
-	    $id=null;
-	 }else{
-	    $id=(int)$_GET["id"];
-	 }
-	 $std_db = new EtudiantRepo($conn);
-	 $students= $std_db->fetchAll($id);
-	 if (!empty($students)){
-	 foreach ($students as $student){
-	    echo $student->toHtml($_SESSION["role"]??"");
-	 }
-      }
-      ?>
+	    require_once(__DIR__.'/../src/entities/Etudiant.php');
+	    require_once(__DIR__.'/../src/repository/EtudiantRepo.php');
+	    require_once(__DIR__.'/../src/config.php');
+	    $id;
+	    if (empty($_GET["id"])){
+	       $id=null;
+	    }else{
+	       $id=(int)$_GET["id"];
+	    }
+	    $std_db = new EtudiantRepo($conn);
+	    $students= $std_db->fetchAll($id);
+	    if (!empty($students)){
+	       foreach ($students as $student){
+		  echo $student->toHtml($_SESSION["role"]??"");
+	       }
+	    }
+	 ?>
       </table>
       </main>
+
+
+
+
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+      <script>
+	 $(document).ready(function() {
+	    $('#etudiantsTable').DataTable({
+	       "pageLength": 5,
+	       "language": {
+		  "search": "Rechercher:" // French translation for the search bar
+	       }
+	    });
+	 });
+      </script>
+
    </body>
 </html>
 

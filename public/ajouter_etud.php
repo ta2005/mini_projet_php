@@ -35,6 +35,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Home</title>
+      <link rel="stylesheet" href="style.css">
    </head>
    <body>
       <nav class="main_nav">	
@@ -47,7 +48,7 @@
       </nav>
       <main>
       <p class="affiche">ajouter un etud</p>
-      <form method="POST" action="ajouter_etud.php">
+      <form method="POST" action="ajouter_etud.php" class="card-form">
 	 <input type="text" name="name" required placeholder="donner un nom">
 	 <input type="date" name="date_de_naiss" required placeholder="donner votre date de naissance">
 	 <input type="text" name="sec" required placeholder="donner votre section">
