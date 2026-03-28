@@ -112,12 +112,22 @@ $role = $_SESSION['role'];
         </table>
     </div>
 
+
+    <!--     Bloatware -->
+
+<!--     jQuery required by DataTables -->
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+<!--     the DataTables engine itself -->
     <script src="https://cdn.datatables.net/2.3.7/js/dataTables.min.js"></script>
+<!--     Action buttons next to search bar -->
     <script src="https://cdn.datatables.net/buttons/3.2.6/js/dataTables.buttons.min.js"></script>
+<!--     Makes the Excel export work -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!--     Makes the PDF export work -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"></script>
+<!--     Helps render text in PDFs correctly with pdfmake -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.min.js"></script>
+<!--     the real fella who enables Copy, CSV, Excel and PDF buttons -->
     <script src="https://cdn.datatables.net/buttons/3.2.6/js/buttons.html5.min.js"></script>
 
     <script>
