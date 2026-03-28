@@ -6,12 +6,22 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 $role = $_SESSION['role'];
-$bdd = ConnexionBD::getINSTANCE();
-$query = "SELECT s.id,s.img , s.name, s.date_de_naiss, sec.des as section 
-          FROM students s 
-          LEFT JOIN section sec ON s.section = sec.id";
-$response = $bdd->prepare($query);
-$response->execute();
+$bdd = ConnexionBD::getInstance();
+if (isset($_GET['section'])) {
+    $query = "SELECT s.id, s.img, s.name, s.date_de_naiss, sec.des as section 
+              FROM students s 
+              LEFT JOIN section sec ON s.section = sec.id
+              WHERE s.section = ?";
+    $response = $bdd->prepare($query);
+    $response->execute([$_GET['section']]);
+} else {
+    $query = "SELECT s.id, s.img, s.name, s.date_de_naiss, sec.des as section 
+              FROM students s 
+              LEFT JOIN section sec ON s.section = sec.id";
+    $response = $bdd->prepare($query);
+    $response->execute();
+}
+
 $students = $response->fetchAll();
 ?>
 <!DOCTYPE html>
