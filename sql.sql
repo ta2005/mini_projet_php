@@ -46,6 +46,8 @@ CREATE TABLE IF NOT EXISTS section (
     description TEXT
 );
 
+ALTER TABLE section ADD UNIQUE (designation);
+
 CREATE TABLE IF NOT EXISTS etudiant (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -63,8 +65,6 @@ CREATE TABLE IF NOT EXISTS etudiant (
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO tp_user;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO tp_user;
 
-
-
 -- =============================
 --  DUMMY VALUES
 -- =============================
@@ -74,7 +74,7 @@ INSERT INTO section (designation, description) VALUES
 ('RT', 'Resaux et Telecommunications'),
 ('IIA', 'Informatique Industrielle et Automatique'),
 ('IMI', 'Instrumentation et Maintenance Industrielle')
-ON CONFLICT DO NOTHING;
+ON CONFLICT (designation) DO NOTHING;
 
 INSERT INTO  utilisateur(username, password, role) VALUES
 ('talel zighni', crypt('123', gen_salt('bf')), 'admin'),

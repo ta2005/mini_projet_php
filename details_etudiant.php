@@ -41,7 +41,7 @@ if(!$etudiant) {
     <div class="navbar">
         <div class="brand">Students Management System</div>
         <a href="home.php">Home</a>
-        <a href="etudiants.php">Liste des étudiants</a>
+        <a href="etudiants.php" class="navbar-selected">Liste des étudiants</a>
         <a href="sections.php">Liste des sections</a>
         <a href="logout.php">Logout</a>
     </div>
