@@ -1,12 +1,6 @@
 <?php
-session_start();
-require_once 'db.php';
 
-if(!isset($_SESSION['user_id'])) {
-    // wait, you're not allowed here!
-    header("Location: index.php");
-    exit;
-}
+require_once 'auth.php';
 
 $query = "
     SELECT e.id, e.name, e.date_de_naissance, e.img_url, s.designation as section_dsg
@@ -35,6 +29,27 @@ $role = $_SESSION['role'];
     <script src="https://unpkg.com/lucide@1.7.0"></script>
 </head>
 <body>
+
+    <?php if(isset($_GET['deleted'])): ?>
+        <div id="error-msg" style="background-color: #28a745;">
+            <span>L'étudiant <?=$_GET['deleted']?> a été supprimé avec succès!</span>
+            <span class="close-btn" onclick="document.getElementById('error-msg').style.display='none'">&times;</span>
+        </div>
+    <?php endif; ?>
+
+    <?php if(isset($_GET['error'])):
+        $err_msg = match($_GET['error']) {
+            'db' => "Erreur de la base de données",
+            'id' => "Erreur ID null",
+            default => "Erreur inconnue.",
+        };
+    ?>
+        <div id="error-msg">
+            <span><?= $err_msg ?></span>
+            <span class="close-btn" onclick="document.getElementById('error-msg').style.display='none'">&times;</span>
+        </div>
+    <?php endif; ?>
+
     <div class="navbar">
         <div class="brand">Students Management System</div>
         <a href="home.php">Home</a>
@@ -52,7 +67,7 @@ $role = $_SESSION['role'];
 
             <?php if($role == 'admin'):?>
                 <a href="add_etudiant.php" title="Ajouter Etudiant">
-                    <i data-lucide="user-plus" style="color: #286cff; cursor: pointer; margin-left: 10px;"></i>
+                    <i data-lucide="user-plus" style="color: var(--accent); cursor: pointer; margin-left: 10px;"></i>
                 </a>
             <?php endif; ?>
         </div>
@@ -81,7 +96,7 @@ $role = $_SESSION['role'];
                     <td><?= htmlspecialchars($s['section_dsg'] ?? 'N\A') ?></td>
                     <?php if($role == 'admin'): ?>
                         <td>
-                            <div style="display: flex; gap: 10px; color: #286cff;">
+                            <div style="display: flex; gap: 10px; color: var(--accent);">
                                 <a href="details_etudiant.php?id=<?= $s['id'] ?>"><i data-lucide="info" size="18"></i></a>
 
                                 <a href="edit_etudiant.php?id=<?= $s['id'] ?>"><i data-lucide="edit-3" size="18"></i></a>
@@ -120,6 +135,12 @@ $role = $_SESSION['role'];
                 table.search($('#customSearch').val()).draw();
             });
         });
+
+        function confirmDelete(id) {
+            if(confirm("SUPPRIMER cet étudiant?")) {
+                window.location.href = "delete_etudiant.php?id=" + id;
+            }
+        }
     </script>
 
 </body>

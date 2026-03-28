@@ -1,11 +1,5 @@
 <?php
-session_start();
-
-if(!isset($_SESSION['user_id'])) {
-    // wait, you're not allowed here!
-    header("Location: index.php");
-    exit;
-}
+require_once 'auth.php';
 
 $role = $_SESSION['role'];
 ?>
