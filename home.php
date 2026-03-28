@@ -16,12 +16,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['role'])) {
 <body>
     <div class="container" >
     <p> Hello, PHP Lovers! Welcome to your administration Platform </p>
-    <?php if($_SESSION['role'] == 'admin') : ?>
-        <a href="admin.php" class="btn btn-primary">Students List</a>
-    <?php else : ?>
-        <a href="normal.php" class="btn btn-primary">Students List</a>
-    <?php endif; ?>
-    </div>
 </body>
 
 </html>
