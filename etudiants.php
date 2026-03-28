@@ -41,6 +41,7 @@ $role = $_SESSION['role'];
         $err_msg = match($_GET['error']) {
             'db' => "Erreur de la base de données",
             'id' => "Erreur ID null",
+            'nf' => "Erreur étudiant introuvable",
             default => "Erreur inconnue.",
         };
     ?>
@@ -131,7 +132,7 @@ $role = $_SESSION['role'];
                 pageLength: 5
             });
 
-            $('filtrerBtn').on('click', function() {
+            $('#filtrerBtn').on('click', function() {
                 table.search($('#customSearch').val()).draw();
             });
         });
