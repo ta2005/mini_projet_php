@@ -5,7 +5,7 @@
    //this is a wrapper class around the section schema
    //it will have create
    //delete
-   require_once('../entities/Section.php');
+   require_once(__DIR__.'/../entities/Section.php');
 
    class SectionRepo{ 
       private PDO $conn;
@@ -67,10 +67,24 @@
 
       }
 
+      public function fetchBydes(string $des):?Section{
+	 $query='SELECT * FROM SECTION WHERE designation=?';
+	 try{
+	    $stmt=$this->conn->prepare(query: $query);
+	    $stmt->bindValue(1,$des);
+	    $stmt->execute();
+	    //php snake case is advice becuase variable are case insentive
+	    $stmt->setFetchMode(PDO::FETCH_CLASS,'Section');
+	    $result=$stmt->fetch();
+	    return ($result?$result:null);
+	 }catch(PDOException $e){
+	    print_r($e->getMessage());
+	    return null;
+	 }
+      }
    }
-   $conn =  new PDO("pgsql:host=localhost;dbname=mini_travail_sel","talel","");
-   /* echo $conn->check_version(); */
-   $test = new SectionRepo($conn);
-   print_r($test->fetchAll());
+      /* $conn = new PDO("pgsql:host=localhost;dbname=mini_travail_sel","talel",""); */
+      /* $s = new SectionRepo($conn); */
+      /* echo $s->fetchBydes("gl2"); */
 
 ?>
