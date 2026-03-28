@@ -1,43 +1,42 @@
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
--- if we gonna verify, we use:
--- SELECT * FROM utilisateur
--- WHERE name = $1 AND password = crypt($2, password);
--- where $1 is the guess for username and $2 for password
+CREATE DATABASE IF NOT EXISTS gestion_etudiants;
+USE gestion_etudiants;
 
--- CREATE TYPE  role AS  ENUM ('normal','admin');
 
-CREATE TABLE IF NOT EXISTS utilisateur(
-    id SERIAL,
+CREATE TABLE IF NOT EXISTS utilisateur (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    --5allehe 3allah
     password TEXT NOT NULL,
-    role role,
-    CONSTRAINT pk_user PRIMARY KEY(id)
+    role ENUM('user', 'admin') NOT NULL DEFAULT 'user'
 );
 
-CREATE TABLE IF NOT EXISTS section(
-    id SERIAL PRIMARY KEY,
-    des TEXT
+
+CREATE TABLE IF NOT EXISTS section (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    des VARCHAR(255) NOT NULL 
 );
 
-CREATE TABLE IF NOT EXISTS etudiant(
-    id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS etudiant (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     date_de_naiss DATE NOT NULL,
     img VARCHAR(256) NOT NULL,
-    section INTEGER,
-    CONSTRAINT fk_section FOREIGN KEY(section) REFERENCES SECTION(id)
+    section_id INT, 
+    CONSTRAINT fk_section 
+        FOREIGN KEY (section_id) 
+        REFERENCES section(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
 );
 
+INSERT INTO section (des) VALUES
+('GL'), ('RT'), ('IMI'), ('IIA');
 
--- INSERT INTO  utilisateur(name,password,role) VALUES
--- ('talel zighni', crypt('123', gen_salt('bf')), 'admin'),
--- ('ahmed el hai', crypt('1234', gen_salt('bf')), 'normal');
+INSERT INTO utilisateur (name, password, role) VALUES
+('talel zighni', SHA2('123', 256), 'admin'),
+('ahmed el hai', SHA2('1234', 256), 'user');
 
-
--- Un user normal n’a le droit qu’à la consultation
--- 7. Vous allez avoir une table etudiant avec un nom, une
--- image, une date de naissance et une section
--- 8. La table section devra avoir une designation et une
--- description.
+INSERT INTO etudiant (name, date_de_naiss, img, section_id) VALUES
+('Ali Ben Salah', '2000-05-12', 'images/pdp.jpg', 1),
+('Sara Trabelsi', '2001-08-22', 'images/pdp.jpg', 2),
+('Mohamed Gharbi', '1999-12-03', 'images/pdp.jpg', 1);
