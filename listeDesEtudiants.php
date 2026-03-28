@@ -20,6 +20,9 @@ $etudiants = $etudiantRepo->findEtudiantsAndSectionPagine($parPage, $offset);
   <title>Liste des étudiants</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
@@ -39,6 +42,7 @@ $etudiants = $etudiantRepo->findEtudiantsAndSectionPagine($parPage, $offset);
         </a>
         <?php endif; ?>
       </div>
+      
 
       <div class="export-bar">
         <div class="export-buttons">
