@@ -38,13 +38,7 @@ if(!$etudiant) {
     <script src="https://unpkg.com/lucide@1.7.0"></script>
 </head>
 <body>
-    <div class="navbar">
-        <div class="brand">Students Management System</div>
-        <a href="home.php">Home</a>
-        <a href="etudiants.php" class="navbar-selected">Liste des étudiants</a>
-        <a href="sections.php">Liste des sections</a>
-        <a href="logout.php">Logout</a>
-    </div>
+    <?php include 'navbar.php';?>
 
     <div style="max-width: 500px; margin: 40px auto; padding: 30px; border: 1px solid #ccc; border-radius: 8px; text-align: center; background: #fff;">
 

@@ -3,14 +3,15 @@
 require_once 'auth.php';
 require_admin();
 
+require_once 'repos/StudentRepo.php';
+
+$studentRepo = new StudentRepo($pdo);
+
 $id = $_GET['id'] ?? null;
 
 if($id) {
     try {
-        $stmt = $pdo->prepare("
-            DELETE FROM etudiant WHERE id = ?
-        ");
-        $stmt->execute([$id]);
+        $studentRepo->deleteStudent($id);
 
         header("Location: etudiants.php?deleted=".$id);
         exit;

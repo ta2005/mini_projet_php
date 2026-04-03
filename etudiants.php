@@ -2,14 +2,13 @@
 
 require_once 'auth.php';
 
-$query = "
-    SELECT e.id, e.name, e.date_de_naissance, e.img_url, s.designation as section_dsg
-    FROM etudiant e
-    LEFT JOIN section s ON e.section_id = s.id
-    ORDER BY e.id ASC
-";
+require_once 'repos/StudentRepo.php';
 
-$students = $pdo->query($query)->fetchAll();
+$studentRepo = new StudentRepo($pdo);
+
+
+$students = $studentRepo->getAllStudentsAndSections();
+
 
 $role = $_SESSION['role'];
 ?>
@@ -32,7 +31,7 @@ $role = $_SESSION['role'];
 
     <?php if(isset($_GET['deleted'])): ?>
         <div id="error-msg" style="background-color: #28a745;">
-            <span>L'étudiant <?=$_GET['deleted']?> a été supprimé avec succès!</span>
+            <span>L'étudiant <?=htmlspecialchars($_GET['deleted'])?> a été supprimé avec succès!</span>
             <span class="close-btn" onclick="document.getElementById('error-msg').style.display='none'">&times;</span>
         </div>
     <?php endif; ?>
@@ -51,13 +50,7 @@ $role = $_SESSION['role'];
         </div>
     <?php endif; ?>
 
-    <div class="navbar">
-        <div class="brand">Students Management System</div>
-        <a href="home.php">Home</a>
-        <a href="etudiants.php" class="navbar-selected">Liste des étudiants</a>
-        <a href="sections.php">Liste des sections</a>
-        <a href="logout.php">Logout</a>
-    </div>
+    <?php include 'navbar.php';?>
 
     <div style="padding: 20px;">
         <h2 style="background-color: #b8b8b8; color: white;">Liste des étudiants</h2>

@@ -3,11 +3,14 @@
 require_once 'auth.php';
 require_admin();
 
+require_once 'repos/StudentRepo.php';
+require_once 'repos/SectionRepo.php';
+
+$studentRepo = new StudentRepo($pdo);
+$sectionRepo = new SectionRepo($pdo);
+
 // Used for combo-box
-$sections = $pdo->query("
-    SELECT DISTINCT ON(designation) id, designation FROM section
-    ORDER BY designation ASC
-")->fetchAll();
+$sections = $sectionRepo->getSectionDesign();
 
 // Form submission
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,11 +21,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if(!empty($name) && !empty($ddn) && !empty($img_url) && !empty($section_id)) {
         try {
-            $stmt = $pdo->prepare("
-                INSERT INTO etudiant (name, date_de_naissance, img_url, section_id)
-                VALUES (?, ?, ?, ?);
-            ");
-            $stmt->execute([$name, $ddn, $img_url, $section_id]);
+            $studentRepo->createStudent($name, $ddn, $img_url, $section_id);
 
             header("Location: etudiants.php");
             exit;
@@ -50,13 +49,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-    <div class="navbar">
-        <div class="brand">Students Management System</div>
-        <a href="home.php">Home</a>
-        <a href="etudiants.php">Liste des étudiants</a>
-        <a href="sections.php">Liste des sections</a>
-        <a href="logout.php">Logout</a>
-    </div>
+    <?php include 'navbar.php';?>
 
     <div style="max-width: 500px; margin: 40px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--accent);">

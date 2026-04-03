@@ -3,6 +3,12 @@
 require_once 'auth.php';
 require_admin();
 
+require_once 'repos/StudentRepo.php';
+require_once 'repos/SectionRepo.php';
+
+$studentRepo = new StudentRepo($pdo);
+$sectionRepo = new SectionRepo($pdo);
+
 $id = $_GET['id'] ?? null;
 
 if(!$id) {
@@ -10,11 +16,7 @@ if(!$id) {
     exit;
 }
 
-$stmt = $pdo->prepare("
-    SELECT * FROM etudiant WHERE id = ?
-");
-$stmt->execute([$id]);
-$etudiant = $stmt->fetch();
+$etudiant = $studentRepo->getStudentById($id);
 
 if(!$etudiant) {
     header("Location: etudiants.php?error=nf");
@@ -22,11 +24,7 @@ if(!$etudiant) {
 }
 
 // for combobox
-$sections = $pdo->query("
-    SELECT DISTINCT ON (designation) id, designation
-    FROM section
-    ORDER BY designation, id ASC
-")->fetchAll();
+$sections = $sectionRepo->getSectionDesign();
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,12 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($name) && !empty($ddn) && !empty($img_url) && !empty($section_id)) {
         try {
-            $updateStmt = $pdo->prepare("
-                UPDATE etudiant
-                SET name = ?, date_de_naissance = ?, img_url = ?, section_id = ?
-                WHERE id = ?
-            ");
-            $updateStmt->execute([$name, $ddn, $img_url, $section_id, $id]);
+            $studentRepo->updateStudent($id, $name, $ddn, $img_url, $section_id);
 
             header("Location: etudiants.php");
             exit;
@@ -68,13 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://unpkg.com/lucide@1.7.0"></script>
 </head>
 <body>
-    <div class="navbar">
-        <div class="brand">Students Management System</div>
-        <a href="home.php">Home</a>
-        <a href="etudiants.php" class="navbar-selected">Liste des étudiants</a>
-        <a href="sections.php">Liste des sections</a>
-        <a href="logout.php">Logout</a>
-    </div>
+    <?php include 'navbar.php';?>
 
     <div style="max-width: 500px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #fff;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--accent);">

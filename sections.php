@@ -2,10 +2,10 @@
 
 require_once 'auth.php';
 
-$stmt = $pdo->query("
-    SELECT * FROM section ORDER BY id ASC
-");
-$sections = $stmt->fetchAll();
+require_once 'repos/SectionRepo.php';
+
+$sectionRepo = new SectionRepo($pdo);
+$sections = $sectionRepo->getSectionAll();
 
 ?>
 
@@ -21,13 +21,7 @@ $sections = $stmt->fetchAll();
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.min.css" />
 </head>
 <body>
-    <div class="navbar">
-        <div class="brand">Students Management System</div>
-        <a href="home.php">Home</a>
-        <a href="etudiants.php">Liste des étudiants</a>
-        <a href="sections.php" class="navbar-selected">Liste des sections</a>
-        <a href="logout.php">Logout</a>
-    </div>
+    <?php include 'navbar.php';?>
 
     <div style="padding: 20px; max-width: 1000px; margin: 0 auto;">
         <h2 style="background-color: #b8b8b8; color: white;">Liste des sections</h2>
