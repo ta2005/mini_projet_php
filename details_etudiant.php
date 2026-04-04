@@ -10,14 +10,11 @@ if(!$id) {
     exit;
 }
 
-$stmt = $pdo->prepare("
-    SELECT e.*, s.designation, s.description
-    FROM etudiant e
-    LEFT JOIN section s ON e.section_id = s.id
-    WHERE e.id = ?
-");
-$stmt->execute([$id]);
-$etudiant = $stmt->fetch();
+require_once 'repos/StudentRepo.php';
+$studentRepo = new StudentRepo($pdo);
+
+$etudiant = $studentRepo->getStudentDetailsAndSection($id);
+
 
 if(!$etudiant) {
     header("Location: etudiants.php?error=nf");

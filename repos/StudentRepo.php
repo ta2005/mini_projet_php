@@ -17,8 +17,10 @@ class StudentRepo {
         $stmt = $this->pdo->prepare("
             SELECT * FROM etudiant WHERE id = ?
         ");
+        $stmt->execute([$id]);
 
-        return $stmt->execute([$id]) -> fetch();
+        $etudiant = $stmt->fetch();
+        return $etudiant;
     }
 
     public function getStudentDetailsAndSection($id) {
@@ -28,7 +30,10 @@ class StudentRepo {
             LEFT JOIN section s ON e.section_id = s.id
             WHERE e.id = ?
         ");
-        return $stmt->execute([$id])->fetch();
+        $stmt->execute([$id]);
+
+        $etudiant = $stmt->fetch();
+        return $etudiant;
     }
 
     public function createStudent($name, $ddn, $img_url, $section_id) {
