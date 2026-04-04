@@ -1,10 +1,10 @@
 <?php
 
-require_once 'auth.php';
+require_once __DIR__.'/../include/auth.php';
 require_admin();
 
-require_once 'repos/StudentRepo.php';
-require_once 'repos/SectionRepo.php';
+require_once __DIR__.'/../repos/StudentRepo.php';
+require_once __DIR__.'/../repos/SectionRepo.php';
 
 $studentRepo = new StudentRepo($pdo);
 $sectionRepo = new SectionRepo($pdo);
@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $studentRepo->createStudent($name, $ddn, $img_url, $section_id);
 
-            header("Location: etudiants.php");
+            header("Location: /pages/etudiants.php");
             exit;
         } catch(PDOException $e) {
             $err_msg = "Erreur lors de l'ajout: ".$e->getMessage();
@@ -42,14 +42,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Liste des étudiants</title>
-    <link href="style.css" rel="stylesheet" />
-    <link href="style_home.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/style_home.css" rel="stylesheet" />
 
     <script src="https://unpkg.com/lucide@1.7.0"></script>
 </head>
 <body>
 
-    <?php include 'navbar.php';?>
+    <?php include __DIR__ . '/../include/navbar.php';?>
 
     <div style="max-width: 500px; margin: 40px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--accent);">
@@ -85,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div style="margin-top: 20px; display: flex; gap: 10px;">
             <button type="submit" style="background-color: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Enregistrer</button>
-            <a href="etudiants.php" style="text-decoration: none; padding: 10px 20px; background: #eee; color: #333; border-radius: 5px;">Annuler</a>
+            <a href="/pages/etudiants.php" style="text-decoration: none; padding: 10px 20px; background: #eee; color: #333; border-radius: 5px;">Annuler</a>
             </div>
         </form>
     </div>

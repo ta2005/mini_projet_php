@@ -1,9 +1,16 @@
 <?php
-$host   = 'localhost';
-$db     = 'gestion_etudiants';
-$user   = 'tp_user';
-$pass   = 'tp_pass';
-$port   = '5432'; // PostgreSQL port
+
+$config = parse_ini_file(__DIR__ . '/env.ini');
+
+if(!$config) {
+    die("Couldn't find config file.");
+}
+
+$host   = $config['DB_HOST'];
+$db     = $config['DB_NAME'];
+$user   = $config['DB_USER'];
+$pass   = $config['DB_PASS'];
+$port   = $config['DB_PORT'];
 
 try {
     $dsn = "pgsql:host=$host;port=$port;dbname=$db";

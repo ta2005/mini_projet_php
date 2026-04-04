@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
-    <link href="style.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
 	<!--   Display error message if error is set from login.php -->
@@ -24,7 +24,7 @@
 	<?php endif; ?>
 
 
-    <form method="POST" action="login.php">
+    <form method="POST" action="pages/login.php">
       <label for="user_name">
         <p>Username</p>
         <input

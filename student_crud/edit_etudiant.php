@@ -1,10 +1,10 @@
 <?php
 
-require_once 'auth.php';
+require_once __DIR__.'/../include/auth.php';
 require_admin();
 
-require_once 'repos/StudentRepo.php';
-require_once 'repos/SectionRepo.php';
+require_once __DIR__.'/../repos/StudentRepo.php';
+require_once __DIR__.'/../repos/SectionRepo.php';
 
 $studentRepo = new StudentRepo($pdo);
 $sectionRepo = new SectionRepo($pdo);
@@ -12,14 +12,14 @@ $sectionRepo = new SectionRepo($pdo);
 $id = $_GET['id'] ?? null;
 
 if(!$id) {
-    header("Location: etudiants.php?error=id");
+    header("Location: /pages/etudiants.php?error=id");
     exit;
 }
 
 $etudiant = $studentRepo->getStudentById($id);
 
 if(!$etudiant) {
-    header("Location: etudiants.php?error=nf");
+    header("Location: /pages/etudiants.php?error=nf");
     exit;
 }
 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $studentRepo->updateStudent($id, $name, $ddn, $img_url, $section_id);
 
-            header("Location: etudiants.php");
+            header("Location: /pages/etudiants.php");
             exit;
         } catch (PDOException $e) {
             $err_msg = "Erreur de mise à jour: " . $e->getMessage();
@@ -56,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Modifier étudiant</title>
-    <link href="style.css" rel="stylesheet" />
-    <link href="style_home.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/style_home.css" rel="stylesheet" />
     <script src="https://unpkg.com/lucide@1.7.0"></script>
 </head>
 <body>
-    <?php include 'navbar.php';?>
+    <?php include __DIR__ . '/../includes/navbar.php';?>
 
     <div style="max-width: 500px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #fff;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--accent);">
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div style="margin-top: 20px; display: flex; gap: 10px;">
             <button type="submit" style="background-color: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Mettre à jour</button>
-            <a href="etudiants.php" style="text-decoration: none; padding: 10px 20px; background: #eee; color: #333; border-radius: 5px;">Annuler</a>
+            <a href="/pages/etudiants.php" style="text-decoration: none; padding: 10px 20px; background: #eee; color: #333; border-radius: 5px;">Annuler</a>
             </div>
         </form>
     </div>

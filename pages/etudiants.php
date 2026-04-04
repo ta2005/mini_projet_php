@@ -1,8 +1,8 @@
 <?php
 
-require_once 'auth.php';
+require_once __DIR__.'/../include/auth.php';
 
-require_once 'repos/StudentRepo.php';
+require_once __DIR__.'/../repos/StudentRepo.php';
 
 $studentRepo = new StudentRepo($pdo);
 
@@ -19,8 +19,8 @@ $role = $_SESSION['role'];
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Liste des étudiants</title>
-    <link href="style.css" rel="stylesheet" />
-    <link href="style_home.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/style_home.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.6/css/buttons.dataTables.min.css" />
@@ -50,7 +50,7 @@ $role = $_SESSION['role'];
         </div>
     <?php endif; ?>
 
-    <?php include 'navbar.php';?>
+    <?php include __DIR__ . '/../include/navbar.php';?>
 
     <div style="padding: 20px;">
         <h2 style="background-color: #b8b8b8; color: white;">Liste des étudiants</h2>
@@ -60,7 +60,7 @@ $role = $_SESSION['role'];
             <button id="filtrerBtn" style="background-color: red;">Filtrer</button>
 
             <?php if($role == 'admin'):?>
-                <a href="add_etudiant.php" title="Ajouter Etudiant">
+                <a href="/student_crud/add_etudiant.php" title="Ajouter Etudiant">
                     <i data-lucide="user-plus" style="color: var(--accent); cursor: pointer; margin-left: 10px;"></i>
                 </a>
             <?php endif; ?>
@@ -91,11 +91,16 @@ $role = $_SESSION['role'];
                     <?php if($role == 'admin'): ?>
                         <td>
                             <div style="display: flex; gap: 10px; color: var(--accent);">
-                                <a href="details_etudiant.php?id=<?= $s['id'] ?>"><i data-lucide="info" size="18"></i></a>
+                                <a href="/student_crud/details_etudiant.php?id=<?= $s['id'] ?>"><i data-lucide="info" size="18"></i></a>
 
-                                <a href="edit_etudiant.php?id=<?= $s['id'] ?>"><i data-lucide="edit-3" size="18"></i></a>
+                                <a href="/student_crud/edit_etudiant.php?id=<?= $s['id'] ?>"><i data-lucide="edit-3" size="18"></i></a>
 
-                                <a href="#" onclick="confirmDelete(<?= $s['id'] ?>)"><i data-lucide="eraser" size="18"></i></a>
+                                <form method="POST" action="/student_crud/delete_etudiant.php" onsubmit="return confirm('SUPPRIMER cet étudiant?');" style="margin:0px;">
+                                <input type="hidden" name="id" value="<?= $s['id'] ?>">
+                                <button type="submit" style="background:none; border:none; padding:0; cursor:pointer; color:var(--accent);">
+                                <i data-lucide="eraser" size="18"></i>
+                                </button>
+                                </form>
                             </div>
                         </td>
                     <?php endif; ?>
@@ -140,11 +145,11 @@ $role = $_SESSION['role'];
             });
         });
 
-        function confirmDelete(id) {
-            if(confirm("SUPPRIMER cet étudiant?")) {
-                window.location.href = "delete_etudiant.php?id=" + id;
-            }
-        }
+        // function confirmDelete(id) {
+        //     if(confirm("SUPPRIMER cet étudiant?")) {
+        //         window.location.href = "delete_etudiant.php?id=" + id;
+        //     }
+        // }
     </script>
 
 </body>

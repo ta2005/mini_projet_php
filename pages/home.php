@@ -1,5 +1,5 @@
 <?php
-require_once 'auth.php';
+require_once __DIR__.'/../include/auth.php';
 
 $role = $_SESSION['role'];
 ?>
@@ -10,11 +10,11 @@ $role = $_SESSION['role'];
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Home - Students Management System</title>
-        <link href="style.css" rel="stylesheet" />
-        <link href="style_home.css" rel="stylesheet" />
+        <link href="/css/style.css" rel="stylesheet" />
+        <link href="/css/style_home.css" rel="stylesheet" />
     </head>
     <body>
-        <?php include 'navbar.php';?>
+        <?php include __DIR__ . '/../include/navbar.php';?>
 
         <div class="content">
             <h1 class="welcome-msg">Hello, PHP LOVERS! Welcome to your administration Platform</h1>

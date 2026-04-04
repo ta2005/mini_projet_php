@@ -1,8 +1,8 @@
 <?php
 
-require_once 'auth.php';
+require_once __DIR__.'/../include/auth.php';
 
-require_once 'repos/SectionRepo.php';
+require_once __DIR__.'/../repos/SectionRepo.php';
 
 $sectionRepo = new SectionRepo($pdo);
 $sections = $sectionRepo->getSectionAll();
@@ -15,13 +15,13 @@ $sections = $sectionRepo->getSectionAll();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Liste des sections</title>
-    <link href="style.css" rel="stylesheet" />
-    <link href="style_home.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/style_home.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.min.css" />
 </head>
 <body>
-    <?php include 'navbar.php';?>
+    <?php include __DIR__ . '/../include/navbar.php';?>
 
     <div style="padding: 20px; max-width: 1000px; margin: 0 auto;">
         <h2 style="background-color: #b8b8b8; color: white;">Liste des sections</h2>

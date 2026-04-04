@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once 'db.php';
+require_once __DIR__.'/../config/db.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username'] ?? '');
@@ -29,24 +29,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['username']   = $user['username'];
                 $_SESSION['role']       = $user['role'];
 
-                header("Location: home.php");
+                header("Location: /pages/home.php");
                 exit;
             } else {
-                header("Location: index.php?error=creds");
+                header("Location: /index.php?error=creds");
                 exit;
             }
 
         } catch (PDOException $e) {
-            header("Location: index.php?error=db");
+            header("Location: /index.php?error=db");
             exit;
         }
     } else {
-        header("Location: index.php?error=vide");
+        header("Location: /index.php?error=vide");
         exit;
     }
 
 } else {
-    header("Location: index.php");
+    header("Location: /index.php");
     exit;
 }
 
